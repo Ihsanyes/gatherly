@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events Page</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        /* Additional custom styling */
+        .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        .nav-link {
+            font-size: 1rem;
+            color: #333;
+        }
+        .nav-link:hover {
+            color: #007bff;
+        }
+        .search-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 5px;
+            gap: 6px;
+        }
+        .search-input{
+            border-radius: 25px;
+            border-bottom-right-radius: 5px;
+            border-top-right-radius: 5px;
+            border: 1px solid #ccc;
+            padding: 10px 15px;
+            outline: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+            width: 300px;
+            background-color: white;
+        }
+        .location-input{
+            border-radius: 25px;
+            border-bottom-left-radius: 5px;
+            border-top-left-radius: 5px;
+            border: 1px solid #ccc;
+            padding: 10px 15px;
+            outline: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+            width: 150px;
+            background-color: white;
+
+        }
+        .welcome-text {
+            font-size: 2.5rem;
+            font-weight: bold;
+            background: linear-gradient(225deg, #1C17AE, #E20606, #1C17AE);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .event-category {
+            text-align: center;
+            font-size: 1rem;
+            color: #000;
+        }
+        .navbar-brand {
+            font-weight: bold;
+            font-weight: 700;
+            font-size: 22px;
+            color: #000;  /* Modify based on your design */
+            letter-spacing: 1px; /* Adjust spacing to your taste */
+        }
+        .dropdown-menu {
+            min-width: 200px;
+        }
+        .event-icon {
+            font-size: 2rem;
+            border: solid;
+            border-radius: 9px;
+            padding: 25px;
+            border-width: thin;
+            width: -webkit-fill-available;
+            width: 110px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Responsive Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container">
+        <!-- Brand -->
+        <a class="navbar-brand logo" href="#">GATHERLY</a>
+
+        <!-- Toggle button for mobile view -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="container">
+            <div class="search-container">
+                <!-- Search Input -->
+                <div class="search-input">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search" style="border: none; outline: none; width: 100%;">
+                </div>
+
+                <!-- Location Input -->
+                <div class="location-input">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <input type="text" placeholder="Location" style="border: none; outline: none; width: 100%;">
+                </div>
+            </div>
+        </div>
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/cardlist/">Events</a>
+                </li>
+                <!-- User dropdown menu -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-user-circle"></i> Account
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
+                        <li><a class="dropdown-item" href="#">Manage your events</a></li>
+                        <li><a class="dropdown-item" href="#">Help</a></li>
+                        <li><a class="dropdown-item" href="#">About</a></li>
+                        <li><a class="dropdown-item" href="#">Contact</a></li>
+                        <li><a class="dropdown-item" href="#">Account settings</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="/logout/">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<!-- Welcome Section -->
+<div class="container my-5 text-center">
+    <h1 class="welcome-text">Welcome Our Events</h1>
+</div>
+
+<!-- Event Image Slider -->
+<div class="container">
+    <div id="eventCarousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="https://via.placeholder.com/800x400" class="d-block w-100 rounded" alt="Event Image">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Music Events in Kochi</h5>
+                    <span class="badge bg-dark">9.8 ★</span>
+                    <span class="badge bg-secondary">Music & cultural events</span>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img src="https://via.placeholder.com/800x400" class="d-block w-100 rounded" alt="Event Image">
+                <div class="carousel-caption d-none d-md-block">
+                    <h5>Music Events in Kochi</h5>
+                    <span class="badge bg-dark">9.8 ★</span>
+                    <span class="badge bg-secondary">Music & cultural events</span>
+                </div>
+            </div>
+            <!-- Additional carousel items can be added here -->
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#eventCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#eventCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+        </button>
+    </div>
+</div>
+
+<!-- Event Categories -->
+<div class="container my-5">
+    <div class="row text-center">
+        <div class="col-4 col-md-2">
+            <div class="event-category">
+                <i class="fa fa-music event-icon"></i>
+                <p>Music & Cultural</p>
+            </div>
+        </div>
+        <div class="col-4 col-md-2">
+            <div class="event-category">
+                <i class="fa fa-church event-icon"></i>
+                <p>Wedding</p>
+            </div>
+        </div>
+        <div class="col-4 col-md-2">
+            <div class="event-category">
+                <i class="fa fa-users event-icon"></i>
+                <p>Family & Community</p>
+            </div>
+        </div>
+        <div class="col-4 col-md-2">
+            <div class="event-category">
+                <i class="fa fa-utensils event-icon"></i>
+                <p>Catering</p>
+            </div>
+        </div>
+        <div class="col-4 col-md-2">
+            <div class="event-category">
+                <i class="fa fa-running event-icon"></i>
+                <p>Sports Events</p>
+            </div>
+        </div>
+        <div class="col-4 col-md-2">
+            <div class="event-category">
+                <i class="fa fa-palette event-icon"></i>
+                <p>Art & Literature</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Bootstrap 5 JS and dependencies -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

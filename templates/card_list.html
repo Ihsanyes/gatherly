@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Listings</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+  <!-- FontAwesome Icons (for WhatsApp and Contact) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+        /* Responsive Navbar  */
+    .navbar-brand {
+        font-weight: bold;
+        font-size: 1.5rem;
+    }
+    .nav-link {
+        font-size: 1rem;
+        color: #333;
+    }
+    .nav-link:hover {
+        color: #007bff;
+    }
+    .search-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 5px;
+        gap: 6px;
+    }
+    .search-input{
+        border-radius: 25px;
+        border-bottom-right-radius: 5px;
+        border-top-right-radius: 5px;
+        border: 1px solid #ccc;
+        padding: 10px 15px;
+        outline: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 1rem;
+        width: 300px;
+        background-color: white;
+    }
+    .location-input{
+        border-radius: 25px;
+        border-bottom-left-radius: 5px;
+        border-top-left-radius: 5px;
+        border: 1px solid #ccc;
+        padding: 10px 15px;
+        outline: none;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 1rem;
+        width: 150px;
+        background-color: white;
+
+    }
+    .navbar-brand {
+        font-weight: bold;
+        font-weight: 700;
+        font-size: 22px;
+        color: #000;  /* Modify based on your design */
+        letter-spacing: 1px; /* Adjust spacing to your taste */
+    }
+    .dropdown-menu {
+        min-width: 200px;
+    }
+
+
+    .btn-sort{
+        color: black;
+        background-color: #dcdedf;
+        border-radius: 10px;
+        /* display: flex;
+        flex-wrap: wrap; */
+
+    }
+    .event-card {
+      margin-bottom: 20px;
+      width: fit-content;
+      border-radius: 8px;
+    }
+    .event-image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-bottom-left-radius: 8px;
+      border-top-left-radius: 8px;
+    }
+    .event-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+    }
+    .rating {
+      font-size: 1.1rem;
+      color: black;
+    }
+    .tags .badge {
+        margin-right: -1px;
+        padding: 7px;
+    }
+    .card-body {
+      padding: 1rem;
+    }
+    .event-buttons button {
+      margin-right: 10px;
+    }
+    .event-location {
+      font-size: 0.9rem;
+      color: #6c757d;
+    }
+    .scroll-section {
+        overflow-y: auto;
+        white-space: nowrap;
+        padding-bottom: 10px;
+        border-radius: 7px;
+        height: 450px;
+    }
+                /* Scrollbar styles for WebKit browsers */
+                ::-webkit-scrollbar {
+                width: 10px;
+                height: 10px;
+
+            }
+
+            ::-webkit-scrollbar-thumb {
+                background-color: #b6b4b47e;
+                border-radius: 0px;
+                border: 2px solid transparent;
+            }
+
+            ::-webkit-scrollbar-track {
+                background-color: #ffffff;
+                border-radius: 0px;
+            }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background-color: #e7e7e8;
+            }
+    .eventcard{
+            text-decoration: none;
+    }
+
+  </style>
+</head>
+<body>
+    <!-- Responsive Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <div class="container">
+            <!-- Brand -->
+            <a class="navbar-brand logo" href="#">GATHERLY</a>
+
+            <!-- Toggle button for mobile view -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="container">
+                <div class="search-container">
+                    <!-- Search Input -->
+                    <div class="search-input">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Search" style="border: none; outline: none; width: 100%;">
+                    </div>
+
+                    <!-- Location Input -->
+                    <div class="location-input">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <input type="text" placeholder="Location" style="border: none; outline: none; width: 100%;">
+                    </div>
+                </div>
+            </div>
+            <!-- Navbar links -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+<!--                    <li class="nav-item">-->
+<!--                        <a class="nav-link" href="#">Events</a>-->
+<!--                    </li>-->
+                    <!-- User dropdown menu -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <i class="fas fa-user-circle"></i> Account
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
+                            <li><a class="dropdown-item" href="#">Manage your events</a></li>
+                            <li><a class="dropdown-item" href="#">Help</a></li>
+                            <li><a class="dropdown-item" href="#">About</a></li>
+                            <li><a class="dropdown-item" href="#">Contact</a></li>
+                            <li><a class="dropdown-item" href="#">Account settings</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="/logout/">Logout</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+
+<div class="container my-3 mt-5 pt-5">
+  <!-- Sorting and Filtering Section -->
+  <div class="d-flex justify-content-between mb-4">
+    <div class="d-flex align-items-center">
+      <!-- Sort By Dropdown -->
+      <div class="dropdown me-1">
+        <button class="btn btn-sort dropdown-toggle" type="button" id="sortByDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+          Sort By
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="sortByDropdown">
+          <li><a class="dropdown-item" href="#">Top Rated</a></li>
+          <li><a class="dropdown-item" href="#">Newest First</a></li>
+          <li><a class="dropdown-item" href="#">Price: Low to High</a></li>
+          <li><a class="dropdown-item" href="#">Price: High to Low</a></li>
+        </ul>
+      </div>
+      <!-- Events Filter Dropdown -->
+      <div class="dropdown me-1">
+        <button class="btn btn-sort dropdown-toggle" type="button" id="eventsDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+          Events
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="eventsDropdown">
+          <li><a class="dropdown-item" href="#">Wedding Events</a></li>
+          <li><a class="dropdown-item" href="#">Music & Cultural Events</a></li>
+          <li><a class="dropdown-item" href="#">Food Festivals</a></li>
+          <li><a class="dropdown-item" href="#">All Events</a></li>
+        </ul>
+      </div>
+      <!-- Filter Dropdown -->
+      <div class="dropdown me-1">
+        <button class="btn btn-sort dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+          Filter
+        </button>
+        <ul class="dropdown-menu" aria-labelledby="filterDropdown">
+          <li><a class="dropdown-item" href="#">Price Range</a></li>
+          <li><a class="dropdown-item" href="#">Ratings</a></li>
+          <li><a class="dropdown-item" href="#">Location</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+<!--card-->
+ <div class="scroll-section">
+    <div class="flex-nowrap">
+        <a href="/eventcard/" class="eventcard">
+        <div class="card event-card">
+            <div class="row g-0">
+                <div class="col-md-4">
+                    <img src="https://via.placeholder.com/400x300" alt="Event Image" class="event-image img-fluid">
+                </div>
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="event-title">Abc Events</h5>
+                        <div class="rating">
+                            <i class="fas fa-star"></i> 4.8 <span class="text-muted">(115 Ratings)</span>
+                        </div>
+                        <p class="event-location">
+                            <i class="fas fa-map-marker-alt"></i> Kochi, Kerala
+                        </p>
+                        <div class="tags">
+                            <span class="badge bg-secondary">Wedding Events</span>
+                            <span class="badge bg-secondary">Music & Cultural Events</span>
+                            <span class="badge bg-secondary">Food Festival</span>
+                        </div>
+                        <div class="event-buttons mt-3">
+                            <button class="btn btn-outline-success">
+                                <i class="fab fa-whatsapp"></i> WhatsApp
+                            </button>
+                            <button class="btn btn-outline-primary">
+                                <i class="fas fa-phone"></i> Contact
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </a>
+    </div>
+</div>
+
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+<!-- FontAwesome JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/js/all.min.js"></script>
+
+</body>
+</html>

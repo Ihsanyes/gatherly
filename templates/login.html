@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Page</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .login-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background-color: #ffffff;
+
+        }
+        .login-box {
+            width: 100%;
+            max-width: 380px;
+            padding: 2rem;
+            border-radius: 8px;
+            background-color: #ffffff;
+
+        }
+        .login-box h2 {
+            text-align: center;
+            font-size: 2rem;
+            font-weight: bold;
+            background: linear-gradient(225deg,#1C17AE, #E20606, #1C17AE); /* Gradient from deep pink to pink */
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: #dc3545; /* Fallback for browsers that don’t support gradient text */
+            margin-bottom: 1.5rem;
+            width: fit-content;
+            margin-inline: auto;
+            text-shadow:  0 4px 8px rgba(0, 0, 0, 0.2);
+            height: 40px;
+        }
+        .form-control {
+            width: 80%;
+            margin-inline: auto;
+            border-radius: 9px;
+            font-size: 1rem;
+            border-color: #00000042;
+            border-width: 2px;
+            box-shadow:  0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .form-control::placeholder {
+            color:  #0000005a;
+            opacity: 1;
+        }
+        .btn-login {
+            display: block;
+            width: 110px;
+            height: 30px;
+            margin: 1rem auto;
+            border-radius: 7px;
+            background-color: #0F0298;
+            color: #ffffff;
+            font-size: 1rem;
+            padding-top: 2px;
+        }
+        .signup-link {
+            text-align: center;
+            margin-top: 1rem;
+            font-size: 0.9rem;
+            color:rgba(0, 0, 0, 0.349);
+        }
+        .signup-link a {
+            color: #0F0298;
+            text-decoration: none;
+        }
+        .signup-link a:hover {
+            text-decoration: underline;
+        }
+        .btn-login:hover {
+            background-color: #0F0298; /* Slightly lighter shade for hover */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            color: #ffffff;
+        }
+        .alert {
+            width: 80%;
+            margin-inline: auto;
+            text-align: center;
+            height: 45px;
+            padding: 10px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="login-container">
+    <div class="login-box">
+        <h2>Login</h2>
+        <form method="POST">
+            {% csrf_token %}
+            {% if messages %}
+              {% for message in messages %}
+                <div class="alert alert-danger">{{ message }}</div>
+              {% endfor %}
+            {% endif %}
+
+
+            <div class="mb-3">
+                <input type="text" id="username" class="form-control" name="username" placeholder="Username" required>
+            </div>
+            <div class="mb-3">
+                <input type="password" id="password" class="form-control" name="password" placeholder="Password" required>
+            </div>
+            <button type="submit" onclick="return submitform()"  class="btn btn-login">Login</button>
+            <div class="signup-link">
+                <p>Don’t have an account? <a href="/signup/">Sign up</a></p>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function submitform(){
+        var username = document.getElementById('username').value;
+        var username = document.getElementById('password').value;
+        var isValid = true;
+
+        if (username===""){
+            document.getElementById('username').style.borderColor ="#dc3545";
+            isValid = false
+        }else{
+            document.getElementById('username').style.borderColor ="";
+        }
+
+        if (username===""){
+            document.getElementById('password').style.borderColor ="#dc3545";
+            isValid = false
+        }else{
+            document.getElementById('password').style.borderColor ="";
+        }
+    }
+</script>
+
+<!-- Bootstrap 5 JS and dependencies -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

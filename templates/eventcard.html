@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <title>Document</title>
+    <style>
+     /* Responsive Navbar  */
+    .navbar-brand {
+            font-weight: bold;
+            font-size: 1.5rem;
+        }
+        .nav-link {
+            font-size: 1rem;
+            color: #333;
+        }
+        .nav-link:hover {
+            color: #007bff;
+        }
+        .search-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 5px;
+            gap: 6px;
+        }
+        .search-input{
+            border-radius: 25px;
+            border-bottom-right-radius: 5px;
+            border-top-right-radius: 5px;
+            border: 1px solid #ccc;
+            padding: 10px 15px;
+            outline: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+            width: 300px;
+            background-color: white;
+        }
+        .location-input{
+            border-radius: 25px;
+            border-bottom-left-radius: 5px;
+            border-top-left-radius: 5px;
+            border: 1px solid #ccc;
+            padding: 10px 15px;
+            outline: none;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 1rem;
+            width: 150px;
+            background-color: white;
+
+        }
+        .navbar-brand {
+            font-weight: bold;
+            font-weight: 700;
+            font-size: 22px;
+            color: #000;  /* Modify based on your design */
+            letter-spacing: 1px; /* Adjust spacing to your taste */
+        }
+        .dropdown-menu {
+            min-width: 200px;
+        }
+
+/* event card         */
+
+        .event-card {
+            border: 1px solid #ddd;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            background-color: #fff;
+            margin-bottom: 2rem;
+        }
+
+        .event-title {
+            color: #1c17ae;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .contact-buttons button {
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+            border-radius: 8px;
+        }
+
+
+        @media (max-width: 768px) {
+            .event-card {
+                padding: 1rem;
+            }
+
+            .contact-buttons {
+                justify-content: center;
+            }
+
+
+        }
+
+
+    </style>
+        <style>
+            .text{
+                font-size: 12px;
+            }
+            .text2{
+                font-size: 13px;
+            }
+            .section-title {
+                margin-top: 0px;
+                font-weight: bold;
+                color: #1c17ae;
+            }
+
+            .services-badge {
+                background-color: #e7f3ff;
+                color: #1c17ae;
+                margin: 0.3rem;
+                padding: 0.5rem 1rem;
+                border-radius: 0.5rem;
+                display: inline-flex;
+            }
+
+            .photos-section img {
+                width: 125px;
+                border-radius: 4px;
+                margin: 0 10px;
+                max-width: 125px;
+            }
+            .row.flex-nowrap {
+                flex-wrap: nowrap !important; /* Prevents wrapping of columns */
+            }
+            .flex-nowrap{
+                width: 126px;
+            }
+
+            .photos-scroll-section {
+                overflow-x: auto;
+                white-space: nowrap;
+                padding-bottom: 10px;
+                border-radius: 7px;
+            }
+
+            /* Scrollbar styles for WebKit browsers */
+            ::-webkit-scrollbar {
+                width: 10px;
+                height: 10px;
+            }
+
+            ::-webkit-scrollbar-thumb {
+                background-color: #ffffff;
+                border-radius: 0px;
+                border: 2px solid transparent;
+            }
+
+            ::-webkit-scrollbar-track {
+                background-color: #ffffff;
+                border-radius: 0px;
+            }
+
+            ::-webkit-scrollbar-thumb:hover {
+                background-color: #e7e7e8;
+            }
+
+            /* Scrollbar styles for Firefox */
+            html {
+                scrollbar-width: thin;
+                scrollbar-color: #e7e7e8 #ffffff;
+            }
+
+            .review-box {
+                margin-bottom: 1rem;
+                padding: 1.5rem;
+                border: 1px solid #ddd;
+                border-radius: 10px;
+                background-color: #f8f9fa;
+            }
+
+            .star-rating .bi-star {
+                font-size: 1.5rem;
+                color: #ddd;
+                cursor: pointer;
+            }
+
+            .star-rating .active {
+                color: #ffc107;
+            }
+
+            .card {
+                margin-top: 15px;
+                padding: 20px;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            }
+
+            hr.custom-hr {
+                width: 100%;
+                margin: 1rem 0;
+                border: 0;
+                border-top: 1px solid black;
+            }
+            .btn{
+                width: fit-content;
+            }
+        </style>
+          <style>
+            .user-rating{
+                text-align: start;
+
+            }
+            .review-card {
+              border-bottom: 1px solid #e0e0e0;
+              padding-bottom: 20px;
+              margin-bottom: 20px;
+            }
+            .review-header {
+              display: flex;
+              align-items: center;
+            }
+            .profile-img {
+              width: 50px;
+              height: 50px;
+              border-radius: 50%;
+              background-color: #f0f0f0;
+              display: inline-block;
+            }
+            .review-body {
+              margin-top: 10px;
+              font-size: 13px;
+            }
+            .star-rating i {
+              color: #ccc;
+            }
+            .review-actions {
+              display: flex;
+              gap: 15px;
+              color: #6c757d;
+              font-size: 18px;
+            }
+            .dropdown-menu {
+              right: 0;
+              left: auto;
+            }
+          </style>
+</head>
+<body>
+    <!-- Responsive Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+    <div class="container">
+        <!-- Brand -->
+        <a class="navbar-brand logo" href="#">GATHERLY</a>
+
+        <!-- Toggle button for mobile view -->
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="container">
+            <div class="search-container">
+                <!-- Search Input -->
+                <div class="search-input">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search" style="border: none; outline: none; width: 100%;">
+                </div>
+
+                <!-- Location Input -->
+                <div class="location-input">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <input type="text" placeholder="Location" style="border: none; outline: none; width: 100%;">
+                </div>
+            </div>
+        </div>
+        <!-- Navbar links -->
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Events</a>
+                </li>
+                <!-- User dropdown menu -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <i class="fas fa-user-circle"></i> Account
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
+                        <li><a class="dropdown-item" href="#">Manage your events</a></li>
+                        <li><a class="dropdown-item" href="#">Help</a></li>
+                        <li><a class="dropdown-item" href="#">About</a></li>
+                        <li><a class="dropdown-item" href="#">Contact</a></li>
+                        <li><a class="dropdown-item" href="#">Account settings</a></li>
+                        <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="/logout/">Logout</a></li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+
+<!-- event card -->
+
+<div class="container mt-3 mt-5 pt-5">
+    <div class="event-card">
+        <div class="row align-items-center">
+            <!-- Left Section -->
+            <div class="col-12 col-md-8">
+                <h4 class="event-title"><i class="bi bi-envelope"></i> Abc Events</h4>
+                <div class="rating">
+                    <span class="rating-badge">4.8 ★</span>
+                    <span>115 Ratings</span>
+                </div>
+                <p class="mt-2"><i class="bi bi-geo-alt-fill"></i> Kochi, Kerala</p>
+                <div class="contact-buttons d-flex flex-wrap">
+                    <button class="btn btn-outline-success btn-sm"><i class="bi bi-whatsapp"></i> Whatsapp</button>
+                    <button class="btn btn-outline-secondary btn-sm"><i class="bi bi-telephone"></i> Contact</button>
+                    <button class="btn btn-outline-info btn-sm"><i class="bi bi-share"></i> Share</button>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+</body>
+<body>
+    <div class="mt-3">
+        <div class="container">
+            <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <li class="nav-item">
+                    <button class="nav-link active" id="overview-tab" data-bs-toggle="tab" data-bs-target="#overview" type="button">Overview</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" id="services-tab" data-bs-toggle="tab" data-bs-target="#services" type="button">Services</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" id="photos-tab" data-bs-toggle="tab" data-bs-target="#photos" type="button">Photos</button>
+                </li>
+                <li class="nav-item">
+                    <button class="nav-link" id="reviews-tab" data-bs-toggle="tab" data-bs-target="#reviews" type="button">Reviews</button>
+                </li>
+            </ul>
+        </div>
+
+        <div class="container">
+            <div class="card">
+                <div class="tab-content mt-4">
+                    <!-- Overview Tab -->
+                    <div class="tab-pane fade show active" id="overview">
+                        <div class="row">
+                            <div class="col-12 col-lg-6 mb-3">
+                                <h5 class="section-title">About</h5>
+                                <p class="container text">Established in 2010</p>
+                                <p class="container text">We have 15 years of experience in organizing events of all types.</p>
+                            </div>
+                            <div class=" col-12 col-lg-6 mb-3">
+                                <h5 class="text2">Contact</h5>
+                                <p class="text"><i class="bi bi-telephone"></i> 9192939495</p>
+                                <h5 class="text2">Address</h5>
+                                <p class="text">Kaloor, Kochi, Kerala<br>(Near Kaloor Metro Station)<br>-612849</p>
+                            </div>
+                        </div>
+                        <hr class="custom-hr">
+                        <h5 class="section-title">Services</h5>
+                            <span class="services-badge">Wedding Events</span>
+                            <span class="services-badge">Corporate Events</span>
+                        <hr class="custom-hr">
+                        <h5 class="section-title">Photos</h5>
+                        <div class="photos-scroll-section">
+                            <div class="row flex-nowrap">
+                                <div class="photos-section"><img src="https://via.placeholder.com/300" alt="Event Photo"></div>
+                                <div class="photos-section"><img src="https://via.placeholder.com/300" alt="Event Photo"></div>
+                                <div class="photos-section"><img src="https://via.placeholder.com/300" alt="Event Photo"></div>
+                            </div>
+                        </div>
+                        <a href="#" class="btn services-badge">
+                            <i class="bi bi-image"></i> Add images
+                        </a>
+                        <hr class="custom-hr">
+                        <h5 class="section-title">Reviews</h5>
+                        <div class="card">
+                            <div class="star-rating">
+                                <i class="bi bi-star" data-rating="1" aria-label="Rate 1 star"></i>
+                                <i class="bi bi-star" data-rating="2" aria-label="Rate 2 stars"></i>
+                                <i class="bi bi-star" data-rating="3" aria-label="Rate 3 stars"></i>
+                                <i class="bi bi-star" data-rating="4" aria-label="Rate 4 stars"></i>
+                                <i class="bi bi-star" data-rating="5" aria-label="Rate 5 stars"></i>
+                            </div>
+                            <textarea class="form-control mt-3" placeholder="Write your review..."></textarea>
+                            <button class="btn btn-primary mt-2">Submit</button>
+                            <p class="rating-value mt-2 text-muted"></p>
+                        </div>
+
+                        <div class="container my-5">
+                            <!-- User Reviews Header -->
+                          <div class="d-flex justify-content-between align-items-center">
+                              <h5 class="section-title">User Reviews</h5>
+                              <div>
+                                  <button class="btn btn-outline-secondary ">Relevant</button>
+                                  <button class="btn btn-outline-secondary">Latest</button>
+                              </div>
+                          </div>
+                          <div class="user-rating text-secondary mb-3">
+                              <span class="">4.8 ★</span>
+                              <span>115 Ratings</span>
+                          </div>
+                            <!-- Review Card 1 -->
+                          <div class="review-card">
+                              <div class="review-header">
+                                  <div class="profile-img" ></div>
+                                  <div class="ms-3">
+                                      <h6 class="mb-0">Name</h6>
+                                      <div class="star-rating">
+                                      <i class="fas fa-star"></i>
+                                      <i class="fas fa-star"></i>
+                                      <i class="fas fa-star"></i>
+                                      <i class="fas fa-star"></i>
+                                      <i class="fas fa-star"></i>
+                                      </div>
+                                  </div>
+                              <div class="ms-auto">
+                                  <div class="dropdown">
+                                  <button class="btn btn-link text-dark p-0" data-bs-toggle="dropdown" aria-expanded="false">
+                                      <i class="fas fa-ellipsis-vertical"></i>
+                                  </button>
+                                  <ul class="dropdown-menu">
+                                      <li><a class="dropdown-item" href="#">Report</a></li>
+                                      <li><a class="dropdown-item" href="#">Delete</a></li>
+                                  </ul>
+                                  </div>
+                              </div>
+                              </div>
+                              <div class="review-body">
+                              <p>
+                                  Amazing place for destination weddings in Kochi. It is specifically designed for weddings. The venue has 2 great
+                                  lawn areas, dining area, and rooms within the property. Well-maintained and neat place at an affordable price.
+                                  The host is very helpful and professional. You must go and check out this place if you are looking for a wedding
+                                  venue in and around Kochi.
+                              </p>
+                              </div>
+                              <div class="review-actions">
+                              <span><i class="far fa-heart"></i></span>
+                              <span><i class="far fa-comment"></i></span>
+                              <span><i class="fas fa-share"></i></span>
+                              </div>
+                          </div>
+
+                      </div>
+
+                    </div>
+
+                    <!-- Services Tab -->
+                    <div class="tab-pane fade" id="services">
+                        <h5 class="section-title">Services</h5>
+                        <span class="services-badge">Wedding Events</span>
+                        <span class="services-badge">Corporate Events</span>
+                    </div>
+
+                    <!-- Photos Tab -->
+                    <div class="tab-pane fade" id="photos">
+                        <h5 class="section-title">Photos</h5>
+                        <div class="photos-scroll-section">
+                            <div class="row flex-nowrap">
+                                <div class="photos-section"><img src="https://via.placeholder.com/300" alt="Event Photo"></div>
+                                <div class="photos-section"><img src="https://via.placeholder.com/300" alt="Event Photo"></div>
+                                <div class="photos-section"><img src="https://via.placeholder.com/300" alt="Event Photo"></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reviews Tab -->
+                    <div class="tab-pane fade" id="reviews">
+                        <h5 class="section-title">Reviews</h5>
+                        <div class="card">
+                            <div class="star-rating">
+                                <i class="bi bi-star" data-rating="1" aria-label="Rate 1 star"></i>
+                                <i class="bi bi-star" data-rating="2" aria-label="Rate 2 stars"></i>
+                                <i class="bi bi-star" data-rating="3" aria-label="Rate 3 stars"></i>
+                                <i class="bi bi-star" data-rating="4" aria-label="Rate 4 stars"></i>
+                                <i class="bi bi-star" data-rating="5" aria-label="Rate 5 stars"></i>
+                            </div>
+                            <textarea class="form-control mt-3" placeholder="Write your review..."></textarea>
+                            <button class="btn btn-primary mt-2">Submit</button>
+                        </div>
+
+                        <div class="container my-5">
+                            <!-- User Reviews Header -->
+                          <div class="d-flex justify-content-between align-items-center">
+                              <h5 class="section-title">User Reviews</h5>
+                              <div>
+                                  <button class="btn btn-outline-secondary ">Relevant</button>
+                                  <button class="btn btn-outline-secondary">Latest</button>
+                              </div>
+                          </div>
+                          <div class="user-rating text-secondary mb-3">
+                              <span class="">4.8 ★</span>
+                              <span>115 Ratings</span>
+                          </div>
+                            <!-- Review Card 1 -->
+                          <div class="review-card">
+                              <div class="review-header">
+                                  <div class="profile-img" ></div>
+                                  <div class="ms-3">
+                                      <h6 class="mb-0">Name</h6>
+                                      <div class="star-rating">
+                                      <i class="fas fa-star"></i>
+                                      <i class="fas fa-star"></i>
+                                      <i class="fas fa-star"></i>
+                                      <i class="fas fa-star"></i>
+                                      <i class="fas fa-star"></i>
+                                      </div>
+                                  </div>
+                              <div class="ms-auto">
+                                  <div class="dropdown">
+                                  <button class="btn btn-link text-dark p-0" data-bs-toggle="dropdown" aria-expanded="false">
+                                      <i class="fas fa-ellipsis-vertical"></i>
+                                  </button>
+                                  <ul class="dropdown-menu">
+                                      <li><a class="dropdown-item" href="#">Report</a></li>
+                                      <li><a class="dropdown-item" href="#">Delete</a></li>
+                                  </ul>
+                                  </div>
+                              </div>
+                              </div>
+                              <div class="review-body">
+                              <p>
+                                  Amazing place for destination weddings in Kochi. It is specifically designed for weddings. The venue has 2 great
+                                  lawn areas, dining area, and rooms within the property. Well-maintained and neat place at an affordable price.
+                                  The host is very helpful and professional. You must go and check out this place if you are looking for a wedding
+                                  venue in and around Kochi.
+                              </p>
+                              </div>
+                              <div class="review-actions">
+                              <span><i class="far fa-heart"></i></span>
+                              <span><i class="far fa-comment"></i></span>
+                              <span><i class="fas fa-share"></i></span>
+                              </div>
+                          </div>
+
+                      </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div>
+
+    </div>
+
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.8/dist/umd/popper.min.js"></script>
+    <script>
+        const stars = document.querySelectorAll('.star-rating i');
+        stars.forEach(star => {
+            star.addEventListener('click', function () {
+                const rating = this.getAttribute('data-rating');
+                stars.forEach(s => {
+                    s.classList.remove('active');
+                    if (s.getAttribute('data-rating') <= rating) {
+                        s.classList.add('active');
+                    }
+                });
+                document.querySelector('.rating-value').textContent = `You rated ${rating} stars`;
+            });
+        });
+    </script>
+</body>
+
+</html>
