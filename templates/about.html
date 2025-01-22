@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
+    <title>Styled Webpage</title>
+    <style>
+        /* Button Styling */
+        .modal-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .modal-btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Modal Styling */
+        .modal-header {
+            background-color: #1c17ae;
+            color: white;
+        }
+
+        .modal-content {
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-footer button {
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-weight: bold;
+            padding: 8px 16px;
+        }
+
+        .modal-footer button:hover {
+            background-color: #e7e7e8;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container mt-5">
+        <!-- Content Section -->
+        <h1 class="text-center mb-4">Welcome to Gatherly</h1>
+        <p class="text-center">Your one-stop solution for event management!</p>
+
+        <!-- Button to Open Modal -->
+        <div class="text-center mt-5">
+            <button class="modal-btn" data-bs-toggle="modal" data-bs-target="#ourDetailsModal">
+                Learn More About Us
+            </button>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="ourDetailsModal" tabindex="-1" aria-labelledby="ourDetailsModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ourDetailsModalLabel">About Gatherly</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        Gatherly is a premier event management platform established in 2010. With over a decade of experience, we specialize in
+                        organizing weddings, corporate events, and personalized celebrations to suit every taste and budget.
+                    </p>
+                    <ul>
+                        <li><strong>Contact:</strong> +91 9192939495</li>
+                        <li><strong>Email:</strong> info@gatherly.com</li>
+                        <li><strong>Location:</strong> Kaloor, Kochi, Kerala</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" style=" background-color: #1c17ae" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

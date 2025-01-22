@@ -94,7 +94,31 @@
             margin-bottom: 0.5rem;
             border-radius: 8px;
         }
+        .edit-card {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 1; /* Ensures it's on top */
+    }
 
+    .edit-card a {
+        color: #000;
+        text-decoration: none;
+        font-size: 1.5rem; /* Adjust icon size */
+    }
+
+    .edit-card a:hover {
+        color: #007bff; /* Highlight color on hover */
+    }
+
+    .event-card {
+        position: relative; /* Necessary for absolute positioning inside it */
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        padding: 15px;
+        background-color: #fff;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
 
         @media (max-width: 768px) {
             .event-card {
@@ -130,13 +154,18 @@
                 padding: 0.5rem 1rem;
                 border-radius: 0.5rem;
                 display: inline-flex;
+                border: none;
             }
 
             .photos-section img {
-                width: 125px;
-                border-radius: 4px;
-                margin: 0 10px;
-                max-width: 125px;
+                width: 110px;
+/* <!--                border-radius: 4px;--> */
+/* <!--                margin: 0;--> */
+                max-width: 110px;
+                min-width: 110px;
+                height: 125px;
+                object-fit: cover;
+                padding-bottom: 1px;
             }
             .row.flex-nowrap {
                 flex-wrap: nowrap !important; /* Prevents wrapping of columns */
@@ -259,7 +288,7 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
     <div class="container">
         <!-- Brand -->
-        <a class="navbar-brand logo" href="#">GATHERLY</a>
+        <a class="navbar-brand logo" href="/home/">GATHERLY</a>
 
         <!-- Toggle button for mobile view -->
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -284,16 +313,14 @@
         <!-- Navbar links -->
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Home</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Events</a>
-                </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/event/add_event/">CreateEvent</a>
+                    </li>
+
                 <!-- User dropdown menu -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        <i class="fas fa-user-circle"></i> Account
+                        <i class="fas fa-user-circle"></i> {{userdata.name}}
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
                         <li><a class="dropdown-item" href="#">Manage your events</a></li>
@@ -315,10 +342,24 @@
 
 <div class="container mt-3 mt-5 pt-5">
     <div class="event-card">
+        <!-- Pencil Icon Positioned to Top-Right -->
+        <div class="edit-card">
+            {% if 'ok' in msgg %}
+                <a href="/event/update/{{carddata.id}}">
+                    <i class="fas fa-pencil-alt"></i>
+                </a>
+                <a href="/event/delete/{{carddata.id}}">
+                    &nsqsube; <i class="fa-solid fa-trash"></i>
+                </a>
+            {% else %}
+                <a href=""></a>
+            {% endif %}
+        </div>
+
         <div class="row align-items-center">
             <!-- Left Section -->
             <div class="col-12 col-md-8">
-                <h4 class="event-title"><i class="bi bi-envelope"></i> Abc Events</h4>
+                <h4 class="event-title"><i class="bi bi-envelope"></i> {{carddata.create_title}}</h4>
                 <div class="rating">
                     <span class="rating-badge">4.8 ★</span>
                     <span>115 Ratings</span>
@@ -330,11 +371,10 @@
                     <button class="btn btn-outline-info btn-sm"><i class="bi bi-share"></i> Share</button>
                 </div>
             </div>
-
-
         </div>
     </div>
 </div>
+
 </body>
 <body>
     <div class="mt-3">
@@ -363,32 +403,62 @@
                         <div class="row">
                             <div class="col-12 col-lg-6 mb-3">
                                 <h5 class="section-title">About</h5>
-                                <p class="container text">Established in 2010</p>
+                                <p class="container text">Established in {{carddata.established_in}}</p>
                                 <p class="container text">We have 15 years of experience in organizing events of all types.</p>
                             </div>
                             <div class=" col-12 col-lg-6 mb-3">
                                 <h5 class="text2">Contact</h5>
-                                <p class="text"><i class="bi bi-telephone"></i> 9192939495</p>
+                                <p class="text"><i class="bi bi-telephone"></i> {{carddata.contact}}</p>
                                 <h5 class="text2">Address</h5>
-                                <p class="text">Kaloor, Kochi, Kerala<br>(Near Kaloor Metro Station)<br>-612849</p>
+                                <p class="text">{{carddata.address}}
+<!--                                    Kaloor, Kochi, Kerala(Near Kaloor Metro Station)-612849-->
+                                </p>
                             </div>
                         </div>
                         <hr class="custom-hr">
                         <h5 class="section-title">Services</h5>
-                            <span class="services-badge">Wedding Events</span>
-                            <span class="services-badge">Corporate Events</span>
+                        
+                        {% if carddata.select_services.all %}
+                            {% for service in carddata.select_services.all %}
+                                <span class="services-badge">{{ service.name }}</span>
+                            {% endfor %}
+                        {% else %}
+                            <p>No services available</p>
+                        {% endif %}                            
                         <hr class="custom-hr">
                         <h5 class="section-title">Photos</h5>
                         <div class="photos-scroll-section">
                             <div class="row flex-nowrap">
-                                <div class="photos-section"><img src="https://via.placeholder.com/300" alt="Event Photo"></div>
-                                <div class="photos-section"><img src="https://via.placeholder.com/300" alt="Event Photo"></div>
-                                <div class="photos-section"><img src="https://via.placeholder.com/300" alt="Event Photo"></div>
+<!--                                <div class="photos-section"><img src="{{carddata.event_photos.url}}" alt="Event Photo"></div>-->
+                                        <div class="photos-section">
+                                            {% if carddata.images.all %}
+                                                {% for image in carddata.images.all %}
+                                                    <img src="{{ image.image.url }}" alt="Event Image">
+                                                {% endfor %}
+                                            {% else %}
+                                                <p>No Photos available</p>
+                                            {% endif %}
+                                        </div>
+<!--                                <div class="photos-section"><img src="" alt="Event Photo"></div>-->
                             </div>
                         </div>
-                        <a href="#" class="btn services-badge">
-                            <i class="bi bi-image"></i> Add images
-                        </a>
+<!--                        <a href="#" class="btn services-badge">-->
+<!--                            <i class="bi bi-image"> Add Images</i><input type="file" style="display: none;" name="images" multiple>-->
+<!--                        </a>-->
+                            {% if 'ok' in msgg %}
+                            <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="upload-box btn services-badge">
+                                <label for="file-upload" >
+                                    <i class="bi bi-image"></i>
+                                +
+                                </label>
+                                <input type="file" name="images" id="file-upload" class="mb-0" style="display: none;" multiple>
+                            </div>
+                                <button class="services-badge" type="submit">Add</button>
+                            </form>
+                            {% else %}
+                            {% endif %}
                         <hr class="custom-hr">
                         <h5 class="section-title">Reviews</h5>
                         <div class="card">
@@ -465,21 +535,45 @@
                     <!-- Services Tab -->
                     <div class="tab-pane fade" id="services">
                         <h5 class="section-title">Services</h5>
-                        <span class="services-badge">Wedding Events</span>
-                        <span class="services-badge">Corporate Events</span>
+                        {% if carddata.select_services.all %}
+                            {% for service in carddata.select_services.all %}
+                                <span class="services-badge">{{ service.name }}</span>
+                            {% endfor %}
+                        {% else %}
+                            <p>No services available</p>
+                        {% endif %}
                     </div>
 
                     <!-- Photos Tab -->
                     <div class="tab-pane fade" id="photos">
                         <h5 class="section-title">Photos</h5>
-                        <div class="photos-scroll-section">
-                            <div class="row flex-nowrap">
-                                <div class="photos-section"><img src="https://via.placeholder.com/300" alt="Event Photo"></div>
-                                <div class="photos-section"><img src="https://via.placeholder.com/300" alt="Event Photo"></div>
-                                <div class="photos-section"><img src="https://via.placeholder.com/300" alt="Event Photo"></div>
-                            </div>
-                        </div>
+<!--                        <div class="photos-scroll-section">-->
+<!--                            <div class="row flex-nowrap">-->
+<!--                                <div class="photos-section"><img src="https://via.placeholder.com/300" alt="Event Photo"></div>-->
+                                         <div class="photos-section ">
+                                            {% for image in carddata.images.all %}
+                                                <img src="{{ image.image.url }}" alt="Event Image" >
+                                            {% endfor %}
+                                        </div>
+<!--                            </div>-->
+<!--                        </div>-->
+                        
+                        {% if 'ok' in msgg %}
+                            <form method="POST" enctype="multipart/form-data">
+                            {% csrf_token %}
+                              <div class="upload-box btn services-badge">
+                                  <label for="file-upload" >
+                                    <i class="bi bi-image"></i>
+                                   +
+                                  </label>
+                                  <input type="file" name="images" id="file-upload" class="mb-0" style="display: none;" multiple>
+                              </div>
+                                <button class="services-badge" type="submit">Add</button>
+                            </form>
+                        {% else %}
+                        {% endif %}
                     </div>
+
 
                     <!-- Reviews Tab -->
                     <div class="tab-pane fade" id="reviews">
@@ -558,9 +652,12 @@
         </div>
     </div>
 
-    <div>
+    <!-- {% if event.creator != event.id %} -->
+    <!-- {% else %} -->
+    <!-- <h1>hey</h1> -->
+    <!-- {% endif %} -->
 
-    </div>
+
 
 
     <!-- Bootstrap JS -->

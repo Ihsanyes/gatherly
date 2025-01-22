@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Form Design</title>
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+  <!-- Font Awesome (Icons) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    /* Custom Styling */
+    body {
+      background-color: #f9f9f9;
+    }
+    .container {
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+    .form-title {
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+    .form-section {
+      margin-bottom: 20px;
+    }
+    .form-group input,
+    .form-group button {
+      border-radius: 5px;
+    }
+    .input-with-pencil {
+      position: relative;
+    }
+    .input-with-pencil input {
+      padding-right: 30px;
+    }
+    .input-with-pencil i {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+    }
+    .upload-box {
+      border: 2px dashed #ccc;
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+      cursor: pointer;
+    }
+    .upload-box:hover {
+      border-color: #007bff;
+    }
+    .section-title {
+      font-size: 1.2rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+    hr{
+        width: 100%;
+    }
+
+  </style>
+</head>
+<body>
+
+<form method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="container my-5">
+    <!-- Title -->
+    <div class="form-section">
+      <!-- <div class="form-title mb-2">Create title +</div> -->
+      <input type="text" name="create_title" value="{{obj.create_title}}" class="form-title mb-2 form-control" placeholder="Create title +">
+      <div class="input-group">
+        <span class="input-group-text"><i class="fas fa-map-marker-alt"></i></span>
+        <input type="text" name="" class="form-control" placeholder="Location +">
+      </div>
+    </div>
+
+    <!-- About Section -->
+    <div class="form-section">
+      <div class="section-title">About</div>
+      <div class="row g-3">
+        <!-- Established in -->
+        <div class="col-md-6 col-lg-3">
+          <div class="input-group">
+            <span class="input-group-text">Established in</span>
+            <input type="text" name="established_in" value="{{obj.established_in}}" class="form-control" placeholder="year +">
+          </div>
+        </div>
+        <!-- Contact -->
+        <div class="col-md-6 col-lg-3 input-with-pencil">
+          <input type="text" name="contact" value="{{obj.contact}}" class="form-control" placeholder="Contact +">
+          <i class="fas fa-pencil-alt"></i>
+        </div>
+        <!-- WhatsApp Number -->
+        <div class="col-md-6 col-lg-3 input-with-pencil">
+          <input type="text" name="wh_number" value="{{obj.wh_number}}" class="form-control" placeholder="Whatsapp Number +">
+          <i class="fas fa-pencil-alt"></i>
+        </div>
+        <!-- Address -->
+        <div class="col-md-6 col-lg-3 input-with-pencil">
+          <input type="text" name="address" value="{{obj.address}}" class="form-control" placeholder="Address +">
+          <i class="fas fa-pencil-alt"></i>
+        </div>
+      </div>
+    </div>
+
+    <!-- Services Section -->
+    <div class="form-section">
+      <div class="section-title d-flex justify-content-between align-items-center">
+        <span>Services +</span>
+        <i class="fas fa-pencil-alt"></i>
+      </div>
+      <div >
+        <input type="text" name="services" value="{{obj.services}}" class="mb-2 form-control" placeholder="Add your services here...">
+
+      </div>
+    </div>
+
+        <div class="form-section">
+      <div class="section-title d-flex justify-content-between align-items-center">
+        <span>price</span>
+        <i class="fas fa-pencil-alt"></i>
+      </div>
+      <div >
+        <input type="number" name="price" value="{{obj.price}}" class="mb-2 form-control" placeholder="Add your price here...">
+
+      </div>
+    </div>
+
+
+    <!-- Photos Section -->
+    <div class="form-section">
+      <div class="section-title">Photos</div>
+      <div class="upload-box">
+          <label for="file-upload">
+            <i class="fas fa-cloud-upload-alt fa-2x mb-2"></i><br>
+            Upload File
+          </label>
+          <input type="file" name="event_photos" id="file-upload" class="mb-0" style="display: none;">
+      </div>
+    </div>
+    <div>
+      <button type="submit" class="btn btn-secondary mt-3">ADD</button>
+    </div>
+  </div>
+
+</form>
+  <!-- Bootstrap JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

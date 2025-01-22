@@ -8,8 +8,9 @@
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
   <!-- FontAwesome Icons (for WhatsApp and Contact) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
   <style>
-        /* Responsive Navbar  */
+    /* Responsive Navbar  */
     .navbar-brand {
         font-weight: bold;
         font-size: 1.5rem;
@@ -28,7 +29,7 @@
         margin-top: 5px;
         gap: 6px;
     }
-    .search-input{
+    .search-input {
         border-radius: 25px;
         border-bottom-right-radius: 5px;
         border-top-right-radius: 5px;
@@ -42,7 +43,7 @@
         width: 300px;
         background-color: white;
     }
-    .location-input{
+    .location-input {
         border-radius: 25px;
         border-bottom-left-radius: 5px;
         border-top-left-radius: 5px;
@@ -55,7 +56,6 @@
         font-size: 1rem;
         width: 150px;
         background-color: white;
-
     }
     .navbar-brand {
         font-weight: bold;
@@ -67,140 +67,127 @@
     .dropdown-menu {
         min-width: 200px;
     }
-
-
-    .btn-sort{
+    .btn-sort {
         color: black;
         background-color: #dcdedf;
         border-radius: 10px;
-        /* display: flex;
-        flex-wrap: wrap; */
-
     }
     .event-card {
-      margin-bottom: 20px;
-      width: fit-content;
-      border-radius: 8px;
+        margin-bottom: 20px;
+        width: fit-content;
+        border-radius: 8px;
+        max-width: 700px;
     }
     .event-image {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      border-bottom-left-radius: 8px;
-      border-top-left-radius: 8px;
+        width: 100%;
+        min-width: 233px;
+        height: 100%;
+        object-fit: cover;
+        border-bottom-left-radius: 8px;
+        border-top-left-radius: 8px;
+    }
+    .col-md-4 {
+        max-height: 225px;
     }
     .event-title {
-      font-size: 1.2rem;
-      font-weight: bold;
+        font-size: 1.2rem;
+        font-weight: bold;
     }
     .rating {
-      font-size: 1.1rem;
-      color: black;
-    }
-    .tags .badge {
-        margin-right: -1px;
-        padding: 7px;
+        font-size: 1.1rem;
+        color: black;
     }
     .card-body {
-      padding: 1rem;
+        padding: 1rem;
     }
     .event-buttons button {
-      margin-right: 10px;
+        margin-right: 10px;
     }
     .event-location {
-      font-size: 0.9rem;
-      color: #6c757d;
+        font-size: 0.9rem;
+        color: #6c757d;
     }
-    .scroll-section {
-        overflow-y: auto;
-        white-space: nowrap;
-        padding-bottom: 10px;
-        border-radius: 7px;
-        height: 450px;
+    ::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
     }
-                /* Scrollbar styles for WebKit browsers */
-                ::-webkit-scrollbar {
-                width: 10px;
-                height: 10px;
-
-            }
-
-            ::-webkit-scrollbar-thumb {
-                background-color: #b6b4b47e;
-                border-radius: 0px;
-                border: 2px solid transparent;
-            }
-
-            ::-webkit-scrollbar-track {
-                background-color: #ffffff;
-                border-radius: 0px;
-            }
-
-            ::-webkit-scrollbar-thumb:hover {
-                background-color: #e7e7e8;
-            }
-    .eventcard{
-            text-decoration: none;
+    ::-webkit-scrollbar-thumb {
+        background-color: #b6b4b47e;
+        border-radius: 0px;
+        border: 2px solid transparent;
     }
-
+    ::-webkit-scrollbar-track {
+        background-color: #ffffff;
+        border-radius: 0px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+        background-color: #e7e7e8;
+    }
+    .eventcard {
+        text-decoration: none;
+    }
   </style>
 </head>
 <body>
     <!-- Responsive Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
         <div class="container">
-            <!-- Brand -->
-            <a class="navbar-brand logo" href="#">GATHERLY</a>
-
-            <!-- Toggle button for mobile view -->
+            <a class="navbar-brand logo" href="/home/">GATHERLY</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-
             <div class="container">
                 <div class="search-container">
-                    <!-- Search Input -->
                     <div class="search-input">
-                        <i class="fas fa-search"></i>
-                        <input type="text" placeholder="Search" style="border: none; outline: none; width: 100%;">
+                        <form method="POST" action="/search/" style="width: 100%;">
+                            {% csrf_token %}
+                            <input type="search"  name="query" value="{{ query }}"  placeholder="Search"  style="border: none; outline: none; width: 100%;">
+                            <!-- <button type="submit">search</button> -->
+                        </form>
+                        {% if results %}
+                        <ul>
+                            {% for event in results %}
+                            
+                            <li>{{ event.create_title }}</li>
+                            
+                            {% endfor %}
+                        </ul>
+                        {% else %}
+                            <!-- <p>No "{{ query }}"</p> -->
+                        {% endif %}
+                        
                     </div>
-
-                    <!-- Location Input -->
                     <div class="location-input">
                         <i class="fas fa-map-marker-alt"></i>
                         <input type="text" placeholder="Location" style="border: none; outline: none; width: 100%;">
                     </div>
                 </div>
             </div>
-            <!-- Navbar links -->
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Home</a>
+                        <a class="nav-link" href="/event/add_event/">CreateEvent</a>
                     </li>
-<!--                    <li class="nav-item">-->
-<!--                        <a class="nav-link" href="#">Events</a>-->
-<!--                    </li>-->
-                    <!-- User dropdown menu -->
+                    <li>
+                        <a class="nav-link" href="/logout/">Logout</a>
+                    </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="userMenu" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                            <i class="fas fa-user-circle"></i> Account
+                            <i class="fas fa-user-circle"></i> {{userdata.name}}
                         </a>
                         <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userMenu">
                             <li><a class="dropdown-item" href="#">Manage your events</a></li>
                             <li><a class="dropdown-item" href="#">Help</a></li>
-                            <li><a class="dropdown-item" href="#">About</a></li>
+                            <li><a class="dropdown-item" href="/about/">About</a></li>
                             <li><a class="dropdown-item" href="#">Contact</a></li>
                             <li><a class="dropdown-item" href="#">Account settings</a></li>
                             <li><hr class="dropdown-divider"></li>
-                            <li><a class="dropdown-item" href="/logout/">Logout</a></li>
                         </ul>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
-
 
 <div class="container my-3 mt-5 pt-5">
   <!-- Sorting and Filtering Section -->
@@ -212,10 +199,10 @@
           Sort By
         </button>
         <ul class="dropdown-menu" aria-labelledby="sortByDropdown">
-          <li><a class="dropdown-item" href="#">Top Rated</a></li>
-          <li><a class="dropdown-item" href="#">Newest First</a></li>
-          <li><a class="dropdown-item" href="#">Price: Low to High</a></li>
-          <li><a class="dropdown-item" href="#">Price: High to Low</a></li>
+          <li><a class="dropdown-item" href="?sort_by=top_rated">Top Rated</a></li>
+          <li><a class="dropdown-item" href="?sort_by=newest">Newest First</a></li>
+          <li><a class="dropdown-item" href="?sort_by=price_low_high">Price: Low to High</a></li>
+          <li><a class="dropdown-item" href="?sort_by=price_high_low">Price: High to Low</a></li>
         </ul>
       </div>
       <!-- Events Filter Dropdown -->
@@ -224,10 +211,13 @@
           Events
         </button>
         <ul class="dropdown-menu" aria-labelledby="eventsDropdown">
-          <li><a class="dropdown-item" href="#">Wedding Events</a></li>
+            {% for x in services %}
+                <li><a class="dropdown-item" href="?category={{ x.name }}">{{x.name}}</a></li>
+            {% endfor %}
+          <!-- <li><a class="dropdown-item" href="#">Wedding Events</a></li>
           <li><a class="dropdown-item" href="#">Music & Cultural Events</a></li>
-          <li><a class="dropdown-item" href="#">Food Festivals</a></li>
-          <li><a class="dropdown-item" href="#">All Events</a></li>
+          <li><a class="dropdown-item" href="#">Food Festivals</a></li> -->
+          <li><a class="dropdown-item" href="?category=">All Events</a></li>
         </ul>
       </div>
       <!-- Filter Dropdown -->
@@ -246,25 +236,29 @@
 <!--card-->
  <div class="scroll-section">
     <div class="flex-nowrap">
-        <a href="/eventcard/" class="eventcard">
+
+        {% for x in eventdata %}
+        <a href="/event/card/{{x.id}}" class="eventcard">
         <div class="card event-card">
             <div class="row g-0">
                 <div class="col-md-4">
-                    <img src="https://via.placeholder.com/400x300" alt="Event Image" class="event-image img-fluid">
+                    <img src="{{x.event_photos.url}}" alt="Event Image" class="event-image img-fluid">
                 </div>
                 <div class="col-md-8">
                     <div class="card-body">
-                        <h5 class="event-title">Abc Events</h5>
+                        <h5 class="event-title"><i class="bi bi-envelope"></i> {{x.create_title}}</h5>
                         <div class="rating">
-                            <i class="fas fa-star"></i> 4.8 <span class="text-muted">(115 Ratings)</span>
+                            <i class="fas fa-star"></i> {{x.rating}} <span class="text-muted">({{x.rating_count}} Ratings)</span>
                         </div>
                         <p class="event-location">
-                            <i class="fas fa-map-marker-alt"></i> Kochi, Kerala
+                            <i class="fas fa-map-marker-alt"></i> {{x.location}}
                         </p>
                         <div class="tags">
-                            <span class="badge bg-secondary">Wedding Events</span>
-                            <span class="badge bg-secondary">Music & Cultural Events</span>
-                            <span class="badge bg-secondary">Food Festival</span>
+                            <p>
+                                {% for service in x.select_services.all %}
+                                {{service.name}},
+                                {% endfor %}
+                            </p>
                         </div>
                         <div class="event-buttons mt-3">
                             <button class="btn btn-outline-success">
@@ -279,6 +273,8 @@
             </div>
         </div>
         </a>
+        {% endfor %}
+
     </div>
 </div>
 
